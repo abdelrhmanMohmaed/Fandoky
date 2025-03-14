@@ -1,0 +1,32 @@
+Note: You should have a node version 22 and if you dosen't use yarn replace all commint to npm.
+Main Branch
+    1- Install React and Vite:
+        1.1- yarn create vite Fandoky --template react
+        1.2- cd Fandoky
+        1.3- yarn install
+    2- Install tailwind css:
+        2.1- npm install -D tailwindcss@3
+        2.2- npx tailwindcss init
+        2.3- Modify the tailwind css configuration file to able to access jsx files 
+                (https://stackoverflow.com/questions/74987006/tailwindcss-not-working-with-vite-react)
+        2.4- Add @tailwind base; @tailwind components; @tailwind utilities; in index.css File
+    3- Install React Router Dom:
+        3.1 yarn add react-router-dom
+        3.2 import the (BrowserRouter, ReactDOM) in the main.jsx project file to able to render in all project and remove client dom
+            use that: 
+                import React from 'react'
+                import ReactDOM from 'react-dom/client'
+                import { BrowserRouter } from 'react-router-dom'
+                import App from './App'
+                import './index.css'
+
+                ReactDOM.createRoot(document.getElementById('root')).render(
+                    <React.StrictMode>
+                        <BrowserRouter>
+                            <App />
+                        </BrowserRouter>
+                    </React.StrictMode>
+                )
+    4- I added the folder structure as per (components, pages, assets, styles, services).
+        4.1- Component Files: (Header, Footer, Navbar).
+        4.2- Pages Files: (Home).
