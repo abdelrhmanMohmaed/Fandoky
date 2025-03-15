@@ -30,3 +30,23 @@ Main Branch
     4- I added the folder structure as per (components, pages, assets, styles, services).
         4.1- Component Files: (Header, Footer, Navbar).
         4.2- Pages Files: (Home).
+
+feature/initial-layout
+    1- I added a project color on tailwind config colors: 
+        {
+            brandPrimary: '#4D869C',
+            brandSecondary: '#7AB2B2',
+            brandBackground: {
+            default: '#EEF7FF',
+            paper: '#CDE8E5',
+            },
+        },
+    3- I added default background on index.css
+    4- Install react-icons react  
+        4.1- yarn add react-icons
+    5- Install react date range
+        5.1- yarn add react-date-range date-fns
+    6- Install jwt
+        6.1- yarn add jwt-decode
+    7- Install react toastify
+        7.1- yarn add react-toastify
