@@ -57,5 +57,12 @@ feature/initial-layout
             Note: we can use the user data from session storage by use key : userName in any Component just import context file.
     10- Make Helper Folder js Dir(Component/services/helpers)
     11- make feature otp verification and resend otp
-    11- Install react password strength bar
+    12- Install react password strength bar
         12.1- yarn add react-password-strength-bar zxcvbn
+    13- Add Helper axios file to use global
+    14- Make a context to fetch plase data
+        14.1- make context to get all places and diplay it in Home
+        14.2- make fillter in navbar and use context to flitrr this data
+        14.3- make a loading card
+    15- Make Footer
+

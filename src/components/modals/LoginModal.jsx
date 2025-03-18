@@ -17,6 +17,7 @@ import { UserContext } from "../../components/context/UserContext";
 export default function LoginModal({ open, setOpen }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const { updateUser, updateVerified } = useContext(UserContext);
@@ -27,7 +28,7 @@ export default function LoginModal({ open, setOpen }) {
     setError("");
 
     try {
-      const response = await login({ email, password });
+      const response = await login({ email, password, rememberMe });
 
       updateUser(response.data.user.name);
       if (response.data.user.email_verified_at) {
@@ -95,7 +96,7 @@ export default function LoginModal({ open, setOpen }) {
               <input
                 type="email"
                 required
-                className={`block w-full p-2 border rounded-md text-gray-400 focus:outline-none focus:ring-2 focus:ring-brandPrimary
+                className={`block w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-brandPrimary
                   ${error ? "border-2 border-rose-500" : "border-gray-300"}
                 `}
                 placeholder="Email address"
@@ -108,7 +109,7 @@ export default function LoginModal({ open, setOpen }) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              error={''}
+              error={""}
             />
 
             {error && (
@@ -117,7 +118,13 @@ export default function LoginModal({ open, setOpen }) {
 
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center">
-                <input type="checkbox" className="mr-2" /> Remember me
+                <input
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  type="checkbox"
+                  className="mr-2"
+                />{" "}
+                Remember me
               </label>
               <NavLink
                 to="/forgot-password"

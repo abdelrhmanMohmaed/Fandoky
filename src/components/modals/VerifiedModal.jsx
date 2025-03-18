@@ -25,7 +25,7 @@ const VerifiedModal = ({ open, setOpen }) => {
       updateVerified(response.data.user.email_verified_at);
       toast.success("OTP verified successfully!", {
         position: "bottom-right",
-        className: "bg-brandPrimary text-white",
+        className: "bg-gradient-to-r from-brandPrimary to-brandSecondary text-white custom-toast-success",
       });
       setOpen(false);
     } catch (error) {
@@ -33,8 +33,8 @@ const VerifiedModal = ({ open, setOpen }) => {
       toast.error(
         `OTP verification failed: ${error.message || "Please try again."}`,
         {
-          className: "bg-red-500 text-white",
           position: "bottom-right",
+          className: "bg-gradient-to-r from-red-600 to-brandPrimary text-white",
         }
       );
       console.log(error.message);
@@ -50,12 +50,12 @@ const VerifiedModal = ({ open, setOpen }) => {
       if (response.data.success) {
         toast.success(response.data.message, {
           position: "bottom-right",
-          className: "bg-brandPrimary text-white",
+          className: "bg-gradient-to-r from-brandPrimary to-brandSecondary text-white custom-toast-success",
         });
       } else {
         toast.error(response.data.message, {
           position: "bottom-right",
-          className: "bg-red-500 text-white",
+          className: "bg-gradient-to-r from-red-600 to-brandPrimary text-white",
         });
       }
     } catch (error) {
@@ -63,7 +63,7 @@ const VerifiedModal = ({ open, setOpen }) => {
         `Resend OTP failed: ${error.message || "Please try again."}`,
         {
           position: "bottom-right",
-          className: "bg-red-500 text-white",
+          className: "bg-gradient-to-r from-red-600 to-brandPrimary text-white",
         }
       );
       console.log(error.message);
@@ -93,7 +93,9 @@ const VerifiedModal = ({ open, setOpen }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-2 text-white rounded bg-brandPrimary hover:bg-[#3A6F81] transition-colors duration-300"
+              className={`w-full py-2 mt-4 text-white rounded-md bg-gradient-to-r from-brandPrimary to-brandSecondary transition-colors duration-300 ease-in-out hover:from-brandSecondary hover:to-brandPrimary ${
+                isLoading ? "cursor-not-allowed" : "cursor-pointer"
+              }`}
             >
               {isLoading ? "Verifying..." : "Verify OTP"}
             </button>

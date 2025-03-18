@@ -64,7 +64,7 @@ const ResetPassword = () => {
       const response = await resetPassword(payload);
       toast.success(response.data.message, {
         position: "bottom-right",
-        className: "bg-brandPrimary text-white",
+        className: "bg-gradient-to-r from-brandPrimary to-brandSecondary text-white custom-toast-success",
       });
       navigate("/");
     } catch (error) {
@@ -73,7 +73,7 @@ const ResetPassword = () => {
       } else {
         toast.error("Password reset failed. Please try again.", {
           position: "bottom-right",
-          className: "bg-red-500 text-white",
+          className: "bg-gradient-to-r from-red-600 to-brandPrimary text-white",
         });
       }
       console.error(error);

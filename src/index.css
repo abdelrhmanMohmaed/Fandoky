@@ -51,3 +51,12 @@ body {
 .custom-toast-success .Toastify__toast-body {
   color: theme("colors.brandBackground.default");
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
