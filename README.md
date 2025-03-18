@@ -5,10 +5,17 @@ Fandoky is a platform that allows users to book accommodations. It's built with 
 ## Features
 
 * User authentication (login, signup, logout)
+* Password reset
+* Email verification
+* User data management using Context API
+* Updated landing page
+* Updated login view and functionality
+* OTP verification and resend
+* Password strength check
 
 ## Technologies Used
 
-* Frontend: React.js, Tailwind CSS, React Toastify, React-icons, jwt-decode, React Date Range
+* Frontend: React.js, Tailwind CSS, React Router DOM, React Toastify, React-icons, jwt-decode, React Date Range, React Password Strength Bar, zxcvbn
 
 ## Getting Started
 
@@ -28,9 +35,13 @@ Fandoky is a platform that allows users to book accommodations. It's built with 
 
 ## Screenshots
 
-![Home Page](screenshots/home.png)
-![Login Modal](screenshots/login-modal.png)
-![Login Successful](screenshots/login-success.png)
+![Home Page (Initial Layout)](screenshots/home-initial-layout.png)
 ![Home Page (Mobile)](screenshots/home-mobile.png)
+![Search (Mobile)](screenshots/search-mobile.png)
+![Login Modal](screenshots/login-modal-initial-layout.png)
+![Login Successful](screenshots/login-success-initial-layout.png)
+![Forgot Password](screenshots/forgot-password.png)
+![Reset Password](screenshots/reset-password.png)
+![Verify Email](screenshots/verify-email.png)
 
 **Note:** The login functionality uses an external API that is currently configured to work only on my local machine. To test the login feature, you will need to set up your own API or modify the existing one to work on your machine.
