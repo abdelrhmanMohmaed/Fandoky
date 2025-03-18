@@ -1,25 +1,25 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+// import { FaEnvelope, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 import {
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import {
-  FaEnvelope,
-  FaLock,
-  FaFacebook,
-  FaTwitter,
-  FaLinkedin,
-} from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { login } from "../../services/auth";
+// Input
+import PasswordInput from "../inputs/PasswordInput";
+// Context
+import { UserContext } from "../../components/context/UserContext";
 
-export default function LoginModal({ open, setOpen, setIsLoggedIn }) {
+export default function LoginModal({ open, setOpen }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const { updateUser, updateVerified } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,8 +27,15 @@ export default function LoginModal({ open, setOpen, setIsLoggedIn }) {
     setError("");
 
     try {
-      await login(email, password);
-      setIsLoggedIn(true);
+      const response = await login({ email, password });
+
+      updateUser(response.data.user.name);
+      if (response.data.user.email_verified_at) {
+        updateVerified(true);
+      } else {
+        updateVerified(false);
+      }
+
       setOpen(false);
 
       toast.success("Login successful.", {
@@ -40,17 +47,19 @@ export default function LoginModal({ open, setOpen, setIsLoggedIn }) {
       setEmail("");
       setPassword("");
     } catch (error) {
-      setError(`${error.message}`);
-      toast.error("Login failed. Please try again.", {
-        className: "bg-red-500 text-white",
-        position: "bottom-right",
-      });
-      console.log(error.message);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message);
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
   };
-
   return (
     <Dialog
       open={open}
@@ -83,28 +92,25 @@ export default function LoginModal({ open, setOpen, setIsLoggedIn }) {
 
           <form className="space-y-4" onSubmit={handleLogin}>
             <div className="relative">
-              <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
               <input
                 type="email"
                 required
-                className="w-full pl-10 p-2 border rounded focus:ring-2 focus:ring-brandPrimary"
+                className={`block w-full p-2 border rounded-md text-gray-400 focus:outline-none focus:ring-2 focus:ring-brandPrimary
+                  ${error ? "border-2 border-rose-500" : "border-gray-300"}
+                `}
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
-            <div className="relative">
-              <FaLock className="absolute left-3 top-3 text-gray-400" />
-              <input
-                type="password"
-                required
-                className="w-full pl-10 p-2 border rounded focus:ring-2 focus:ring-brandPrimary"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+            <PasswordInput
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              error={''}
+            />
+
             {error && (
               <p className="text-red-500 text-sm text-center">{error}</p>
             )}
@@ -113,21 +119,19 @@ export default function LoginModal({ open, setOpen, setIsLoggedIn }) {
               <label className="flex items-center">
                 <input type="checkbox" className="mr-2" /> Remember me
               </label>
-              <a
-                href="#"
+              <NavLink
+                to="/forgot-password"
                 className="text-brandPrimary hover:text-brandSecondary"
               >
                 Forgot password?
-              </a>
+              </NavLink>
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full py-2 text-white rounded ${
-                isLoading
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-gradient-to-r from-brandSecondary to-brandPrimary hover:from-brandPrimary to-brandSecondary"
+              className={`w-full py-2 mt-4 text-white rounded-md bg-gradient-to-r from-brandPrimary to-brandSecondary transition-colors duration-300 ease-in-out hover:from-brandSecondary hover:to-brandPrimary ${
+                isLoading ? "cursor-not-allowed" : "cursor-pointer"
               }`}
             >
               {isLoading ? "Logging in..." : "Login"}
