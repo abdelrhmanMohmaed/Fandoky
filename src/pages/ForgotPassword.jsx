@@ -17,7 +17,7 @@ export default function ForgotPassword() {
       const res = await sendResetLinkEmail(email);
       toast.success(res.data.message, {
         position: "bottom-right",
-        className: "bg-brandPrimary text-white",
+        className: "bg-gradient-to-r from-brandPrimary to-brandSecondary text-white custom-toast-success",
       });
 
       setEmail("");
@@ -26,7 +26,7 @@ export default function ForgotPassword() {
       setError(`${error.message}`);
       toast.error("Failed to send reset link", {
         position: "bottom-right",
-        className: "bg-red-500 text-white",
+        className: "bg-gradient-to-r from-red-600 to-brandPrimary text-white",
       });
       console.log(error);
     } finally {

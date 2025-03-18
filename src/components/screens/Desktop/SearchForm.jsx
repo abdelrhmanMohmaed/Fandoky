@@ -130,7 +130,7 @@ function SearchForm({
           </div>
           <button
             type="submit"
-            className={`bg-gradient-to-r from-brandPrimary to-brandSecondary text-white rounded-full p-3 ml-2 flex items-center transition-all duration-300 ${
+            className={`bg-gradient-to-r from-brandPrimary to-brandSecondary text-white transition-all duration-300 rounded-full p-3 ml-2 flex items-center transition-all duration-300 ${
               isHoveredSubmitSearch ? "w-32" : "w-12"
             }`}
             onMouseEnter={() => setIsHoveredSubmitSearch(true)}

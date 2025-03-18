@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 
 // Context
 import { UserContext } from "./context/UserContext";
+import { PlaceContext } from "./context/PlaceContext";
 
 // Modals
 import SignupModal from "./modals/SignupModal";
@@ -18,11 +19,13 @@ import VerifiedModal from "./modals/VerifiedModal";
 import MobileSearchBar from "./screens/Mobile/SearchBar";
 import SearchModal from "./screens/Mobile/SearchModal";
 import SearchForm from "./screens/Desktop/SearchForm";
+import FilterSlider from "./screens/FilterBar";
 
 function Navbar() {
   // Context Shared data
   const { userName, verified, isLoggedIn, updateUser, updateVerified } =
     useContext(UserContext);
+  const { setSelectedFilter } = useContext(PlaceContext);
   // Models
   const [signupModalOpen, setSignupModalOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -79,19 +82,20 @@ function Navbar() {
 
       toast.success("Logout successful.", {
         position: "bottom-right",
-        className: "bg-brandPrimary text-white",
+        className:
+          "bg-gradient-to-r from-brandPrimary to-brandSecondary text-white custom-toast-success",
       });
     } catch (error) {
       console.error("Logout failed:", error);
       toast.error("Logout failed. Please try again.", {
         position: "bottom-right",
-        className: "bg-red-500 text-white",
+        className: "bg-gradient-to-r from-red-600 to-brandPrimary text-white",
       });
     }
   };
 
   return (
-    <div className="sticky top-0 z-50 bg-brandBackground-default border-b-2 border-gray-200">
+    <div className="sticky top-0 z-40 bg-brandBackground-default border-b-2 border-gray-200">
       {/* ====== Header (verified Alert) ====== */}
       {isLoggedIn && !verified && (
         <div
@@ -249,6 +253,9 @@ function Navbar() {
         setIsHoveredSubmitSearch={setIsHoveredSubmitSearch}
         handleSelect={handleSelect}
       />
+
+      {/* ====== Filter ====== */}
+      <FilterSlider onSelect={(filter) => setSelectedFilter(filter)} />
     </div>
   );
 }
