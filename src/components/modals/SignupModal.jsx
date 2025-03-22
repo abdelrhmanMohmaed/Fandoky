@@ -1,10 +1,10 @@
+import IconRenderer from "../icon/IconRenderer";
 import {
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { FaUser } from "react-icons/fa";
 
 export default function SignupModal({ open, setOpen }) {
   return (
@@ -31,7 +31,10 @@ export default function SignupModal({ open, setOpen }) {
                     as="h3"
                     className="text-base font-semibold text-gray-900"
                   >
-                    <FaUser className="inline-block h-5 w-5 mr-2"/>
+                    <IconRenderer
+                      iconName={"FaUser"}
+                      className={"inline-block h-5 w-5 mr-2"}
+                    />
                     Signup
                   </DialogTitle>
                 </div>

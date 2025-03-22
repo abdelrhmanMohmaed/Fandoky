@@ -6,6 +6,7 @@ export const PlaceProvider = ({ children }) => {
   const [selectedFilter, setSelectedFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [Places, setPlaces] = useState([]);
+  const [pagination, setPagination] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -19,7 +20,15 @@ export const PlaceProvider = ({ children }) => {
       queryParams.set("page", currentPage);
 
       const response = await places(queryParams.toString());
-      setPlaces(response.data.data || response.data);
+      const fetchedPlaces = response.data.data || response.data;
+
+      if (currentPage > 1) {
+        setPlaces((prevPlaces) => [...prevPlaces, ...fetchedPlaces]);
+      } else {
+        setPlaces(fetchedPlaces);
+      }
+
+      setPagination(response.data.pagination);
     } catch (err) {
       setError(err.message);
       console.error("Error fetching places:", err);
@@ -31,7 +40,22 @@ export const PlaceProvider = ({ children }) => {
   useEffect(() => {
     fetchPlacesData();
   }, [selectedFilter, currentPage]);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 400 &&
+        !isLoading &&
+        pagination &&
+        currentPage < pagination.last_page
+      ) {
+        setCurrentPage((prevPage) => prevPage + 1);
+      }
+    };
 
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isLoading, pagination, currentPage]);
   return (
     <PlaceContext.Provider
       value={{
@@ -40,6 +64,7 @@ export const PlaceProvider = ({ children }) => {
         currentPage,
         setCurrentPage,
         Places,
+        pagination,
         isLoading,
         error,
       }}

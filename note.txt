@@ -65,4 +65,6 @@ feature/initial-layout
         14.2- make fillter in navbar and use context to flitrr this data
         14.3- make a loading card
     15- Make Footer
-
+    16- install heroicons
+        16.1- yarn add @heroicons/react
+    17- make a share icon commponent

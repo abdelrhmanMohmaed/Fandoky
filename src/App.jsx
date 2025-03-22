@@ -9,6 +9,7 @@ import Navbar from "./components/Nabbar";
 import Loader from "./components/Loader";
 import Home from "./pages/Home";
 import ForgotPassword from "./pages/ForgotPassword";
+import ContactUs from "./pages/ContactUs";
 import ResetPassword from "./pages/ResetPassword";
 import Footer from "./components/Footer";
 
@@ -27,8 +28,12 @@ function App() {
     }, 1500);
   }, [location.pathname]);
 
-  const hideNavbarPaths = ["/forgot-password", "/reset-password"];
+  // Hiden Navbar in pages below
+  const hideNavbarPaths = ["/forgot-password", "/reset-password", "/contact"];
   const shouldHideNavbar = hideNavbarPaths.includes(location.pathname);
+  // Hiden Footer in pages below
+  const hideFooterPaths = ["/forgot-password", "/reset-password", "/contact"];
+  const shouldHideFooter = hideFooterPaths.includes(location.pathname);
 
   return (
     <div>
@@ -39,9 +44,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/contact" element={<ContactUs />} />
         </Routes>
         <ToastContainer autoClose={3000} />
-        <Footer />
+        {!shouldHideFooter && <Footer />}
       </PlaceProvider>
     </div>
   );

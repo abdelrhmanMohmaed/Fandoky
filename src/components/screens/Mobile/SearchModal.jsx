@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { FaSearch, FaTimes } from "react-icons/fa";
+import React, { useState } from "react";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
+import IconRenderer from "../../icon/IconRenderer";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
@@ -43,7 +43,7 @@ function SearchModal({
           onClick={onClose}
           className="text-gray-600 hover:text-gray-900 text-2xl font-bold"
         >
-          <FaTimes />
+          <IconRenderer iconName={"FaTimes"} className={"h-4 w-4 mr-2"} />
         </button>
         <h2 className="text-lg font-semibold">Search</h2>
         <div className="w-8" />
@@ -130,7 +130,7 @@ function SearchModal({
           onMouseEnter={() => setIsHoveredSubmitSearch(true)}
           onMouseLeave={() => setIsHoveredSubmitSearch(false)}
         >
-          <FaSearch className="h-4 w-4 mr-2" />
+          <IconRenderer iconName={"FaSearch"} className={"h-4 w-4 mr-2"} />
           <strong>Search</strong>
         </button>
       </div>

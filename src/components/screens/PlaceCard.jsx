@@ -1,44 +1,100 @@
-import React from "react";
-import { GoStarFill } from "react-icons/go";
-import { FaHeart } from "react-icons/fa";
+import React, { useState } from "react";
+import IconRenderer from "../icon/IconRenderer";
 
 export default function PlaceCard({ place }) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev == 0 ? place.images.length - 1 : prev - 1));
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev == place.images.length - 1 ? 0 : prev + 1));
+  };
+
   return (
-    <div
-      key={place.id}
-      className="relative border rounded-md overflow-hidden shadow-md"
-    >
-      <div className="relative">
-        <img
-          src={place.image}
-          alt={place.name}
-          className="w-full h-48 object-cover"
-        />
-        {place.badge && (
-          <div className="absolute top-2 left-2 bg-white text-black text-xs px-2 py-1 rounded-full shadow">
-            {place.badge}
+    <div className="relative w-full p-5 md:p-0">
+      <div className="relative border rounded-[12px] overflow-hidden">
+        <div className="relative w-full group">
+          <div className="relative overflow-hidden">
+            <div className="h-56 sm:h-64 md:h-72 lg:h-80 cursor-pointer">
+              {place.images.map((imageObj, index) => (
+                <img
+                  key={index}
+                  src={imageObj.name}
+                  alt={`image ${index + 1}`}
+                  className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
+                    index == currentSlide ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
-        )}
-        <button className="absolute top-2 right-2">
-          <FaHeart className="text-white hover:text-red-500" size={18} />
-        </button>
+
+          <button
+            onClick={prevSlide}
+            className="hidden group-hover:block absolute top-1/2 transform -translate-y-1/2 left-4 bg-white/60 hover:bg-white/90 rounded-full p-1 focus:outline-none"
+          >
+            <IconRenderer
+              iconName={"GrFormPrevious"}
+              size={22}
+              className={"text-black font-bold"}
+            />
+            <span className="sr-only">Previous</span>
+          </button>
+
+          <button
+            onClick={nextSlide}
+            className="hidden group-hover:block absolute top-1/2 transform -translate-y-1/2 right-4 bg-white/60 hover:bg-white/90 rounded-full p-1 focus:outline-none"
+          >
+            <IconRenderer
+              iconName={"GrFormNext"}
+              size={22}
+              className={"text-black font-bold"}
+            />
+            <span className="sr-only">Next</span>
+          </button>
+
+          <button className="absolute top-2 right-2">
+            <IconRenderer
+              iconName={"FaHeart"}
+              size={18}
+              className={"text-white hover:text-red-500"}
+            />
+          </button>
+
+          <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-2">
+            {place.images.map((_, index) => (
+              <span
+                key={index}
+                className={`w-2 h-2 rounded-full ${
+                  index === currentSlide ? "bg-brandPrimary" : "bg-gray-300"
+                }`}
+              ></span>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div className="p-4 text-sm">
-        <div className="flex items-center justify-between text-gray-500 mb-1">
-          <span>{place.distance}</span>
-          <span>{place.dates}</span>
-          <span>{place.category}</span>
+      <div className="py-2 text-sm">
+        <div className="flex justify-between items-center gap-2 mt-1">
+          <h3 className="font-semibold text-base text-brandPrimary">
+            {place.name}
+          </h3>
+          <div className="flex items-center gap-1  ">
+            <IconRenderer
+              iconName={"GoStarFill"}
+              size={18}
+              className={"text-brandPrimary"}
+            />
+            <span className="text-brandPrimary">
+              {parseFloat(place.rating).toFixed(2)}
+            </span>
+          </div>
         </div>
-
-        <h3 className="font-semibold text-base text-gray-800">{place.name}</h3>
-
-        <div className="flex items-center gap-1 mt-1 text-gray-600">
-          <GoStarFill className="text-yellow-400" />
-          <span>{place.rating}</span>
-        </div>
-
-        <p className="text-gray-800 mt-1">{place.price} total before taxes</p>
+        <span className="text-brandSecondary">{place.category}</span>
+        <p className="text-brandPrimary mt-1">
+          {parseFloat(place.price).toFixed(2)} ج/م night
+        </p>
       </div>
     </div>
   );
