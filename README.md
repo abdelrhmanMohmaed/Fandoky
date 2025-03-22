@@ -18,6 +18,10 @@ Fandoky is a platform that allows users to book accommodations. It's built with 
     * **Filter Places:** Implemented filtering functionality in the Navbar using Context data.
     * **Loading Card:** Added a loading card component for better user experience during data fetching.
 * **Footer:** Added a footer component.
+* **Contact Info Page:** Added a new page to display contact information.
+* **Infinite Scroll for Data Fetching:** Implemented infinite scroll functionality on the Home page to fetch and display more data as the user scrolls down.
+* **Search Modal on Landing Page:** Added a search modal component to the landing page for improved search functionality.
+* **Icon Component:** Created a reusable component for icons to simplify icon usage throughout the application.
 
 ## Technologies Used
 
@@ -41,7 +45,7 @@ Fandoky is a platform that allows users to book accommodations. It's built with 
 
 ## Screenshots
 
-![Home Page (Initial Layout)](screenshots/home-initial-layout.png)
+![Home Page (Initial Layout)](screenshots/home.png)
 ![Login Modal](screenshots/login-modal-initial-layout.png)
 ![Footer Modal](screenshots/footer.png)
 ![Home Filter](screenshots/home-filter.png)
@@ -52,6 +56,7 @@ Fandoky is a platform that allows users to book accommodations. It's built with 
 ![Verify Email](screenshots/verify-email.png)
 ![Home Page (Mobile)](screenshots/home-mobile.png)
 ![Search (Mobile)](screenshots/search-mobile.png)
-
+![Contact Info Page](screenshots/contact-info.png)
+![Search Modal (Landing Page)](screenshots/search-modal-landing.png)
 
 **Note:** The login functionality uses an external API that is currently configured to work only on my local machine. To test the login feature, you will need to set up your own API or modify the existing one to work on your machine.

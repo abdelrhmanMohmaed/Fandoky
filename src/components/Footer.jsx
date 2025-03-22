@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
+  const navigate = useNavigate();
+
   return (
     <footer className="bg-white border-t border-gray-200 mt-8 text-sm text-gray-600">
       <div className="max-w-7xl mx-auto py-8 px-4">
@@ -59,7 +62,7 @@ export default function Footer() {
           <div>
             <h3 className="text-gray-900 font-medium mb-2">Support</h3>
             <ul className="space-y-1">
-              <li><a href="#" className="hover:underline">Help Center</a></li>
+              <li><a onClick={() => navigate("/contact")} className="hover:underline cursor-pointer">Help Center</a></li>
               <li><a href="#" className="hover:underline">Safety information</a></li>
               <li><a href="#" className="hover:underline">Cancellation options</a></li>
               <li><a href="#" className="hover:underline">Supporting people</a></li>

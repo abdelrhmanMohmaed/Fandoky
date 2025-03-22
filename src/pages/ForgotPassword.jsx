@@ -102,16 +102,16 @@ export default function ForgotPassword() {
         </div>
       </div>
       {/* Second Side (Right) */}
-      <div className="hidden md:flex md:w-1/2 bg-gradient-to-l from-brandPrimary to-brandSecondary flex-col justify-center items-center p-10">
+      <div className="hidden md:flex md:w-1/2 bg-gradient-to-r from-brandBackground-default to-dark flex-col justify-center items-center p-10">
         <img
           src={bigLogo}
           alt="Queفند Logo"
           className="h-auto w-80 pb-5"
         />
-        <h3 className="text-2xl font-extrabold mb-2 tracking-wide font-mono text-white">
+        <h3 className="text-2xl font-extrabold mb-2 tracking-wide font-mono text-dark">
           QUEفند
         </h3>
-        <p className="text-sm text-center max-w-xs text-white/80 hover:text-white ">
+        <p className="text-sm text-center max-w-xs text-dark/80 hover:text-dark ">
           Your gateway to exclusive hotel bookings and unique travel
           experiences.
         </p>

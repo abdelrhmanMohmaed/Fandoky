@@ -1,5 +1,5 @@
 import React from "react";
-import { FaSearch } from "react-icons/fa";
+import IconRenderer from "../../icon/IconRenderer";
 
 function SearchBar({ onOpenModal }) {
   return (
@@ -9,7 +9,7 @@ function SearchBar({ onOpenModal }) {
         onClick={onOpenModal}
       >
         <span className="text-gray-500 ml-2">Where to?</span>
-        <FaSearch className="text-brandPrimary mr-2" />
+          <IconRenderer iconName={"FaSearch"} className={"text-brandPrimary mr-2"} />
       </div>
     </div>
   );

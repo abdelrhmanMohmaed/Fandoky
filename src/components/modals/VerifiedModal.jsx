@@ -25,7 +25,8 @@ const VerifiedModal = ({ open, setOpen }) => {
       updateVerified(response.data.user.email_verified_at);
       toast.success("OTP verified successfully!", {
         position: "bottom-right",
-        className: "bg-gradient-to-r from-brandPrimary to-brandSecondary text-white custom-toast-success",
+        className:
+          "bg-gradient-to-r from-brandPrimary to-brandSecondary text-white custom-toast-success",
       });
       setOpen(false);
     } catch (error) {
@@ -37,7 +38,7 @@ const VerifiedModal = ({ open, setOpen }) => {
           className: "bg-gradient-to-r from-red-600 to-brandPrimary text-white",
         }
       );
-      console.log(error.message);
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -50,7 +51,8 @@ const VerifiedModal = ({ open, setOpen }) => {
       if (response.data.success) {
         toast.success(response.data.message, {
           position: "bottom-right",
-          className: "bg-gradient-to-r from-brandPrimary to-brandSecondary text-white custom-toast-success",
+          className:
+            "bg-gradient-to-r from-brandPrimary to-brandSecondary text-white custom-toast-success",
         });
       } else {
         toast.error(response.data.message, {
@@ -66,7 +68,7 @@ const VerifiedModal = ({ open, setOpen }) => {
           className: "bg-gradient-to-r from-red-600 to-brandPrimary text-white",
         }
       );
-      console.log(error.message);
+      console.log(error);
     }
   };
   return (

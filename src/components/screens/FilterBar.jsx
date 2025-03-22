@@ -1,27 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
-import { FaChevronLeft, FaChevronRight, FaFilter } from "react-icons/fa";
+import IconRenderer from "../icon/IconRenderer";
 
 const filters = [
-  { id: 1, label: "All", icon: "🔄" },
-  { id: 2, label: "Amazing views", icon: "🏞️" },
-  { id: 3, label: "Luxury Stay", icon: "😱" },
-  { id: 4, label: "Budget Friendly", icon: "🏖️" },
-  { id: 5, label: "Seaside Escape", icon: "🔥" },
-  { id: 6, label: "Tiny homes", icon: "🏠" },
-  { id: 7, label: "Windmills", icon: "💨" },
-  { id: 8, label: "Luxe", icon: "💎" },
-  { id: 9, label: "Lakefront", icon: "🚣" },
-  { id: 10, label: "Play", icon: "🎮" },
-  { id: 11, label: "All", icon: "🔄" },
-  { id: 12, label: "Amazing views", icon: "🏞️" },
-  { id: 13, label: "Luxury Stay", icon: "😱" },
-  { id: 14, label: "Budget Friendly", icon: "🏖️" },
-  { id: 15, label: "Seaside Escape", icon: "🔥" },
-  { id: 16, label: "Tiny homes", icon: "🏠" },
-  { id: 17, label: "Windmills", icon: "💨" },
-  { id: 18, label: "Luxe", icon: "💎" },
-  { id: 19, label: "Lakefront", icon: "🚣" },
-  { id: 20, label: "Play", icon: "🎮" },
+  { id: 1, label: "All", icon: "ArrowPathIcon" },
+  { id: 2, label: "Amazing views", icon: "ChartPieIcon" },
+  { id: 3, label: "Luxury Stay", icon: "CursorArrowRaysIcon" },
+  { id: 4, label: "Budget Friendly", icon: "FingerPrintIcon" },
+  { id: 5, label: "Seaside Escape", icon: "SquaresPlusIcon" },
+  { id: 6, label: "Tiny homes", icon: "SquaresPlusIcon" },
 ];
 
 export default function FilterSlider({ onSelect, onOpenAdvancedFilter }) {
@@ -67,13 +53,13 @@ export default function FilterSlider({ onSelect, onOpenAdvancedFilter }) {
   };
 
   return (
-    <div className="w-full bg-white border-b border-gray-200 relative flex items-center px-4">
+    <div className="w-full bg-white border-b border-gray-200 relative flex items-center px-4 justify-center">
       {!hideLeft && (
         <button
           onClick={scrollLeft}
           className="p-2 text-gray-500 hover:text-brandPrimary focus:outline-none"
         >
-          <FaChevronLeft size={20} />
+          <IconRenderer iconName={"FaChevronLeft"} />
         </button>
       )}
 
@@ -95,7 +81,11 @@ export default function FilterSlider({ onSelect, onOpenAdvancedFilter }) {
                 }
               `}
             >
-              <span className="text-2xl">{item.icon}</span>
+              <IconRenderer
+                iconName={item.icon}
+                className={"w-5 h-5 text-gray-600"}
+              />
+              {/* <span className="text-2xl">{item.icon}</span> */}
               <span className="text-xs mt-1 whitespace-nowrap">
                 {item.label}
               </span>
@@ -109,7 +99,7 @@ export default function FilterSlider({ onSelect, onOpenAdvancedFilter }) {
           onClick={scrollRight}
           className="p-2 text-gray-500 hover:text-brandPrimary focus:outline-none"
         >
-          <FaChevronRight size={20} />
+          <IconRenderer iconName={"FaChevronRight"} size={20} />
         </button>
       )}
 
@@ -117,7 +107,7 @@ export default function FilterSlider({ onSelect, onOpenAdvancedFilter }) {
         onClick={onOpenAdvancedFilter}
         className="ml-2 flex items-center gap-1 bg-gradient-to-r from-brandPrimary to-brandSecondary text-white transition-all duration-300  transition-colors px-3 py-2 rounded hover:from-brandSecondary hover:to-brandPrimary"
       >
-        <FaFilter />
+        <IconRenderer iconName={"FaFilter"} />
         <span>Filter</span>
       </button>
     </div>

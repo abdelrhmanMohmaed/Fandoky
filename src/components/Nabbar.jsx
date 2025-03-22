@@ -1,7 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { FaUserCircle, FaBars, FaUser, FaUserPlus } from "react-icons/fa";
-import { HiOutlineLogin, HiOutlineLogout } from "react-icons/hi";
 import Logo from "../assets/logo.png";
 import { logout } from "../services/auth";
 import { toast } from "react-toastify";
@@ -9,12 +7,12 @@ import { toast } from "react-toastify";
 // Context
 import { UserContext } from "./context/UserContext";
 import { PlaceContext } from "./context/PlaceContext";
-
+// Icon
+import IconRenderer from "./icon/IconRenderer";
 // Modals
 import SignupModal from "./modals/SignupModal";
 import LoginModal from "./modals/LoginModal";
 import VerifiedModal from "./modals/VerifiedModal";
-
 // Media Query
 import MobileSearchBar from "./screens/Mobile/SearchBar";
 import SearchModal from "./screens/Mobile/SearchModal";
@@ -165,8 +163,12 @@ function Navbar() {
                   : "from-brandSecondary to-brandPrimary"
               } text-white p-3 ml-2 flex items-center shadow-lg rounded-full transition-colors duration-300 ease-in-out hover:from-brandPrimary hover:to-brandSecondary focus:outline-none focus:ring focus:ring-brandSecondary border border-gray-200`}
             >
-              <FaBars className="h-4 w-4 mr-2" />
-              {isLoggedIn ? `Hi, ${userName}` : <FaUser className="h-4 w-4" />}
+              <IconRenderer iconName={"FaBars"} className={"h-4 w-4 mr-2"} />
+              {isLoggedIn ? (
+                `Hi, ${userName}`
+              ) : (
+                <IconRenderer iconName={"FaUser"} className={"h-4 w-4"} />
+              )}
             </button>
             {isOpenSubMenu && (
               <div className="absolute right-4 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-20">
@@ -178,14 +180,20 @@ function Navbar() {
                       }}
                       className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
                     >
-                      <FaUserCircle className="inline-block h-5 w-5 mr-2" />
+                      <IconRenderer
+                        iconName={"FaUserCircle"}
+                        className={"inline-block h-5 w-5 mr-2"}
+                      />
                       View Profile
                     </button>
                     <button
                       onClick={handleLogout}
                       className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
                     >
-                      <HiOutlineLogout className="inline-block h-5 w-5 mr-2" />
+                      <IconRenderer
+                        iconName={"HiOutlineLogout"}
+                        className={"inline-block h-5 w-5 mr-2"}
+                      />
                       Log out
                     </button>
                   </>
@@ -198,7 +206,10 @@ function Navbar() {
                       }}
                       className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
                     >
-                      <FaUserPlus className="inline-block h-5 w-5 mr-2" />
+                      <IconRenderer
+                        iconName={"FaUserPlus"}
+                        className={"inline-block h-5 w-5 mr-2"}
+                      />
                       Sign up
                     </button>
                     <button
@@ -208,7 +219,10 @@ function Navbar() {
                       }}
                       className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
                     >
-                      <HiOutlineLogin className="inline-block h-5 w-5 mr-2" />
+                      <IconRenderer
+                        iconName={"HiOutlineLogin"}
+                        className={"inline-block h-5 w-5 mr-2"}
+                      />
                       Log in
                     </button>
                   </>

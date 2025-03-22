@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-// import { FaEnvelope, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
+import IconRenderer from "../icon/IconRenderer";
 import {
   Dialog,
   DialogBackdrop,
@@ -79,13 +79,15 @@ export default function LoginModal({ open, setOpen }) {
 
           {/* <div className="flex justify-center space-x-4 mt-4">
             <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded flex items-center">
-              <FaFacebook className="mr-2" /> Facebook
+              <IconRenderer iconName={"FaFacebook"} className={"mr-2"} />{" "}
+              Facebook
             </button>
             <button className="bg-blue-400 hover:bg-blue-600 text-white py-2 px-4 rounded flex items-center">
-              <FaTwitter className="mr-2" /> Twitter
+              <IconRenderer iconName={"FaTwitter"} className={"mr-2"} /> Twitter
             </button>
             <button className="bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded flex items-center">
-              <FaLinkedin className="mr-2" /> LinkedIn
+              <IconRenderer iconName={"FaLinkedin"} className={"mr-2"} />{" "}
+              LinkedIn
             </button>
           </div>
 
@@ -137,9 +139,8 @@ export default function LoginModal({ open, setOpen }) {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full py-2 mt-4 text-white rounded-md bg-gradient-to-r from-brandPrimary to-brandSecondary transition-colors duration-300 ease-in-out hover:from-brandSecondary hover:to-brandPrimary ${
-                isLoading ? "cursor-not-allowed" : "cursor-pointer"
-              }`}
+              className={`w-full py-2 mt-4 text-white rounded-md bg-gradient-to-r from-brandPrimary to-brandSecondary transition-colors duration-300 ease-in-out hover:from-brandSecondary hover:to-brandPrimary
+                ${isLoading ? "cursor-not-allowed" : "cursor-pointer"}`}
             >
               {isLoading ? "Logging in..." : "Login"}
             </button>

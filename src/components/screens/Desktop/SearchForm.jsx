@@ -1,7 +1,9 @@
 import React from "react";
-import { FaSearch } from "react-icons/fa";
+import IconRenderer from "../../icon/IconRenderer";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
+
+import SearchDesktopModal from "./SearchModal";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
@@ -34,23 +36,23 @@ function SearchForm({
       } hidden md:block md:w-3/5`}
     >
       <div
-        className={`w-full bg-white rounded-full shadow-lg flex items-center ${
-          showCalendar ? "overflow-visible" : "overflow-hidden"
-        }`}
+        className={`w-full bg-white rounded-full shadow-lg flex items-center`}
+        // ${ showCalendar ? "overflow-visible" : "overflow-hidden" }
       >
         {/* Where */}
-        <div className="flex items-center px-3 py-2 hover:bg-gray-50 transition-colors cursor-pointer flex-grow relative border-r border-gray-200">
+        <SearchDesktopModal />
+        {/* <div className="flex items-center px-3 py-2 hover:bg-gray-50 transition-colors cursor-pointer flex-grow relative border-r border-gray-200">
           <label className="text-sm font-semibold py-2 mr-1">Where</label>
           <input
             type="text"
             placeholder="Search destinations"
             className="focus:outline-none bg-transparent placeholder-gray-500 w-full"
-          />
-        </div>
+            />
+        </div> */}
 
         {/* Check In + Check Out */}
         <div
-          className="relative place-content-evenly flex items-center px-4 py-2 hover:bg-gray-50 transition-colors cursor-pointer flex-grow border-r border-gray-200"
+          className="relative place-content-evenly flex items-center px-4 py-2 border-r rounded-full border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer flex-grow"
           onClick={handleCheckInClick}
         >
           <div>
@@ -69,9 +71,10 @@ function SearchForm({
 
           {showCalendar && (
             <div
-              className="absolute top-full left-0 mt-2 bg-white rounded-md shadow-lg p-4 z-30"
               onClick={handleCalendarClick}
+              className="absolute top-full left-8 mt-5 bg-white z-30 p-4 rounded rounded-3xl shadow-lg ring-1 ring-gray-900/5"
             >
+              {/* //  max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-sm/6 shadow-lg ring-1 ring-gray-900/5 */}
               <DateRange
                 editableDateInputs={true}
                 onChange={handleSelect}
@@ -123,7 +126,7 @@ function SearchForm({
         </div>
 
         {/* Who + Search Button */}
-        <div className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition-colors cursor-pointer flex-grow border-r border-gray-200">
+        <div className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 transition-colors cursor-pointer flex-grow rounded-full border-gray-200">
           <div>
             <p className="text-sm font-semibold">Who</p>
             <p className="text-sm text-gray-500">Add guests</p>
@@ -136,7 +139,7 @@ function SearchForm({
             onMouseEnter={() => setIsHoveredSubmitSearch(true)}
             onMouseLeave={() => setIsHoveredSubmitSearch(false)}
           >
-            <FaSearch className="h-4 w-4 mr-2" />
+            <IconRenderer iconName={"FaSearch"} className={"h-4 w-4 mr-2"} />
             {isHoveredSubmitSearch && <strong>Search</strong>}
           </button>
         </div>
