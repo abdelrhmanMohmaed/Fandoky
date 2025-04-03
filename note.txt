@@ -56,15 +56,25 @@ feature/initial-layout
         9.1- We are make a context file to be able to shared the user data in the system + use provider to handling it data Dir(src/components/context/UserContext)
             Note: we can use the user data from session storage by use key : userName in any Component just import context file.
     10- Make Helper Folder js Dir(Component/services/helpers)
-    11- make feature otp verification and resend otp
+    11- Make feature otp verification and resend otp
     12- Install react password strength bar
         12.1- yarn add react-password-strength-bar zxcvbn
     13- Add Helper axios file to use global
     14- Make a context to fetch plase data
-        14.1- make context to get all places and diplay it in Home
-        14.2- make fillter in navbar and use context to flitrr this data
-        14.3- make a loading card
+        14.1- Make context to get all places and diplay it in Home
+        14.2- Make fillter in navbar and use context to flitrr this data
+        14.3- Make a loading card
     15- Make Footer
     16- install heroicons
         16.1- yarn add @heroicons/react
-    17- make a share icon commponent
+    17- ake a share icon commponent
+
+feature/geolocation-nearby-places
+    1- Make .env file and use it in the project
+    2- install react-google-maps
+        2.1 yarn add @react-google-maps/api
+    3- Make context to share the current user location (geolocation)
+    4- Integrated with Google Maps. Done.
+    5- Search results page PlaceSearch Done
+    6- Specific search page PlaceDetails Done
+        6.1- Boojing Model Done

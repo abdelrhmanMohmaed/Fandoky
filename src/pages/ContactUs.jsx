@@ -110,13 +110,14 @@ export default function ContactUs() {
               htmlFor="first-name"
               className="block text-sm/6 font-semibold text-brandPrimary"
             >
-              First name
+              First name *
             </label>
             <div className="mt-2.5">
               <input
                 id="first-name"
                 name="first-name"
                 type="text"
+                required
                 value={fristName}
                 onChange={(e) => setFristName(e.target.value)}
                 autoComplete="given-name"
@@ -166,7 +167,7 @@ export default function ContactUs() {
               htmlFor="email"
               className="block text-sm/6 font-semibold text-brandPrimary"
             >
-              Email
+              Email *
             </label>
             <div className="mt-2.5">
               <input
@@ -195,12 +196,13 @@ export default function ContactUs() {
               htmlFor="message"
               className="block text-sm/6 font-semibold text-brandPrimary"
             >
-              Message
+              Message *
             </label>
             <div className="mt-2.5">
               <textarea
                 id="message"
                 name="message"
+                required
                 rows={4}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import IconRenderer from "../icon/IconRenderer";
+import { useNavigate } from "react-router-dom";
 
 export default function PlaceCard({ place }) {
+  const navigate = useNavigate();
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev == 0 ? place.images.length - 1 : prev - 1));
@@ -18,14 +21,16 @@ export default function PlaceCard({ place }) {
           <div className="relative overflow-hidden">
             <div className="h-56 sm:h-64 md:h-72 lg:h-80 cursor-pointer">
               {place.images.map((imageObj, index) => (
-                <img
-                  key={index}
-                  src={imageObj.name}
-                  alt={`image ${index + 1}`}
-                  className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
-                    index == currentSlide ? "opacity-100" : "opacity-0"
-                  }`}
-                />
+                <div onClick={() => navigate(`/place/${place.id}`)} key={index}>
+                  <img
+                    key={index}
+                    src={imageObj.name}
+                    alt={`image ${index + 1}`}
+                    className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
+                      index == currentSlide ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                </div>
               ))}
             </div>
           </div>

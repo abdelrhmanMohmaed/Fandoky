@@ -97,7 +97,7 @@ const ResetPassword = () => {
         <form onSubmit={handleReset} className="space-y-5">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Enter OTP
+              Enter OTP *
             </label>
             <OTPInput onChangeOTP={setOtp} />
             {errors.otp && (
@@ -108,7 +108,7 @@ const ResetPassword = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
+              Email *
             </label>
             <input
               type="email"
@@ -127,7 +127,7 @@ const ResetPassword = () => {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              New Password
+              New Password *
             </label>
 
             <PasswordInput
@@ -142,7 +142,7 @@ const ResetPassword = () => {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Confirm Password
+              Confirm Password *
             </label>
             <input
               type="password"

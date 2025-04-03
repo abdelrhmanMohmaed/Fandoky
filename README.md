@@ -22,17 +22,23 @@ Fandoky is a platform that allows users to book accommodations. It's built with 
 * **Infinite Scroll for Data Fetching:** Implemented infinite scroll functionality on the Home page to fetch and display more data as the user scrolls down.
 * **Search Modal on Landing Page:** Added a search modal component to the landing page for improved search functionality.
 * **Icon Component:** Created a reusable component for icons to simplify icon usage throughout the application.
+* **Geolocation and Nearby Places:** Implemented geolocation functionality using Google Maps API to find and display nearby places.
+    * **User Location Context:** Created a context to share the user's current location.
+    * **Place Search Page:** Added a page to display search results for places.
+    * **Place Details Page:** Added a page to display details for a specific place.
+    * **Booking Modal:** Added a booking modal to the Place Details page.
 
 ## Technologies Used
 
-* Frontend: React.js, Tailwind CSS, React Router DOM, React Toastify, React-icons, jwt-decode, React Date Range, React Password Strength Bar, zxcvbn
+* Frontend: React.js, Tailwind CSS, React Router DOM, React Toastify, React-icons, jwt-decode, React Date Range, React Password Strength Bar, zxcvbn, @react-google-maps/api
 
 ## Getting Started
 
 1. Clone the repository: `git clone https://github.com/abdelrhmanMohmaed/Fandoky`
 2. Install dependencies: `yarn install` or `npm install`
-3. Start the development server: `yarn dev` or `npm start`
-4. Open your browser at `http://localhost:5173/`
+3. Create a `.env` file with your Google Maps API key (if using geolocation features).
+4. Start the development server: `yarn dev` or `npm start`
+5. Open your browser at `http://localhost:5173/`
 
 ## Contributing
 
@@ -58,5 +64,10 @@ Fandoky is a platform that allows users to book accommodations. It's built with 
 ![Search (Mobile)](screenshots/search-mobile.png)
 ![Contact Info Page](screenshots/contact-info.png)
 ![Search Modal (Landing Page)](screenshots/search-modal-landing.png)
+![Place Search Page](screenshots/place-search.png)
+![Place geolocation](screenshots/geolocation.png)
+![Place Details Page](screenshots/place-details.png)
+![Place Details 2 Page](screenshots/place-details2.png)
+![Booking Modal](screenshots/booking-modal.png)
 
-**Note:** The login functionality uses an external API that is currently configured to work only on my local machine. To test the login feature, you will need to set up your own API or modify the existing one to work on your machine.
+**Note:** All API functionalities, including login and geolocation features, are currently configured to work only on the local machine. To fully test these features, you will need to set up your own API endpoints and obtain a Google Maps API key.
