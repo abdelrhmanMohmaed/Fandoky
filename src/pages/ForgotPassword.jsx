@@ -67,7 +67,7 @@ export default function ForgotPassword() {
           <form onSubmit={handleSendLink} className="space-y-4">
             <label className="block">
               <span className="block text-sm font-medium text-gray-700">
-                Email
+                Email *
               </span>
               <input
                 type="email"

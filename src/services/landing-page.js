@@ -6,3 +6,12 @@ export const places = (queryString = "") => {
             return response;
         });
 };
+
+export const getPlaceById = (id) => {
+    return axiosInstance.get(`places/${id}`)
+        .then(response => {
+            // console.log(response);
+            
+            return response;
+        });
+};

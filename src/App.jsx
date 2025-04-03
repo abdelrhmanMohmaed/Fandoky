@@ -7,11 +7,14 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Navbar from "./components/Nabbar";
 import Loader from "./components/Loader";
+import Footer from "./components/Footer";
+
 import Home from "./pages/Home";
 import ForgotPassword from "./pages/ForgotPassword";
 import ContactUs from "./pages/ContactUs";
 import ResetPassword from "./pages/ResetPassword";
-import Footer from "./components/Footer";
+import PlaceDetails from "./pages/PlaceDetails";
+import PlaceSearch from "./pages/PlaceSearch";
 
 // import Home from './Home';
 // import About from './About';
@@ -45,6 +48,8 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/place/:id" element={<PlaceDetails />} />
+          <Route path="/place-filters" element={<PlaceSearch />} />
         </Routes>
         <ToastContainer autoClose={3000} />
         {!shouldHideFooter && <Footer />}

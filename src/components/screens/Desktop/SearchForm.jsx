@@ -14,9 +14,11 @@ function SearchForm({
   showCalendar,
   handleCheckInClick,
   setShowCalendar,
+  setSelectedCategoryFilter,
   isHoveredSubmitSearch,
   setIsHoveredSubmitSearch,
   handleSelect,
+  onSearchSubmit,
 }) {
   const selectionRange = { startDate, endDate, key: "selection" };
 
@@ -39,16 +41,8 @@ function SearchForm({
         className={`w-full bg-white rounded-full shadow-lg flex items-center`}
         // ${ showCalendar ? "overflow-visible" : "overflow-hidden" }
       >
-        {/* Where */}
-        <SearchDesktopModal />
-        {/* <div className="flex items-center px-3 py-2 hover:bg-gray-50 transition-colors cursor-pointer flex-grow relative border-r border-gray-200">
-          <label className="text-sm font-semibold py-2 mr-1">Where</label>
-          <input
-            type="text"
-            placeholder="Search destinations"
-            className="focus:outline-none bg-transparent placeholder-gray-500 w-full"
-            />
-        </div> */}
+        {/* Where Input */}
+        <SearchDesktopModal setSelectedCategoryFilter={setSelectedCategoryFilter} />
 
         {/* Check In + Check Out */}
         <div
@@ -115,12 +109,14 @@ function SearchForm({
                   "w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100"
                 }
               />
-              <button
-                onClick={handleDone}
-                className="mt-2 bg-brandPrimary text-white px-3 py-1 rounded-md"
-              >
-                Done
-              </button>
+              <div className="flex justify-center">
+                <button
+                  onClick={handleDone}
+                  className="w-4/5 px-3 py-1 mt-2 bg-gradient-to-r from-brandPrimary to-brandSecondary text-white transition-all duration-300 rounded-full hover:from-brandSecondary hover:to-brandPrimary"
+                >
+                  Done
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -138,6 +134,7 @@ function SearchForm({
             }`}
             onMouseEnter={() => setIsHoveredSubmitSearch(true)}
             onMouseLeave={() => setIsHoveredSubmitSearch(false)}
+            onClick={onSearchSubmit}
           >
             <IconRenderer iconName={"FaSearch"} className={"h-4 w-4 mr-2"} />
             {isHoveredSubmitSearch && <strong>Search</strong>}

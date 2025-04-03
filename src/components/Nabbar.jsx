@@ -1,29 +1,39 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
-import { logout } from "../services/auth";
 import { toast } from "react-toastify";
+import { format } from "date-fns";
 
-// Context
+// APIS Services
+import { logout } from "../services/auth";
+import { places_filter } from "../services/places_filter";
+
+// contexts
+import { LocationContext } from "./context/LocationContext";
 import { UserContext } from "./context/UserContext";
 import { PlaceContext } from "./context/PlaceContext";
-// Icon
+
+// icons
 import IconRenderer from "./icon/IconRenderer";
-// Modals
+
+// modals
 import SignupModal from "./modals/SignupModal";
 import LoginModal from "./modals/LoginModal";
 import VerifiedModal from "./modals/VerifiedModal";
-// Media Query
+
+// media Query
 import MobileSearchBar from "./screens/Mobile/SearchBar";
 import SearchModal from "./screens/Mobile/SearchModal";
 import SearchForm from "./screens/Desktop/SearchForm";
 import FilterSlider from "./screens/FilterBar";
 
 function Navbar() {
-  // Context Shared data
+  // context Shared data
   const { userName, verified, isLoggedIn, updateUser, updateVerified } =
     useContext(UserContext);
   const { setSelectedFilter } = useContext(PlaceContext);
+  const { userLocation } = useContext(LocationContext);
+
   // Models
   const [signupModalOpen, setSignupModalOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -31,14 +41,21 @@ function Navbar() {
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   const location = useLocation();
+  const navigate = useNavigate();
+  const isUrlEmpty = location.pathname === "/"; // useing in hidden filter bar
   const [isHoveredSubmitSearch, setIsHoveredSubmitSearch] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showCalendar, setShowCalendar] = useState(false);
+  const [isOpenSubMenu, setIsOpenSubMenu] = useState(false);
+  const menuRef = useRef(null); 
+
+  // Search filter
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [isOpenSubMenu, setIsOpenSubMenu] = useState(false);
-  const menuRef = useRef(null);
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("");
+  const [guests, setGuests] = useState(1);
+  const [showCalendar, setShowCalendar] = useState(false);
 
+  // Action with scroll window
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
@@ -46,16 +63,7 @@ function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const handleCheckInClick = () => {
-    setShowCalendar(!showCalendar);
-  };
-
-  const handleSelect = (ranges) => {
-    setStartDate(ranges.selection.startDate);
-    setEndDate(ranges.selection.endDate);
-  };
-
+  // sub-meuo in the top-left
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -70,6 +78,45 @@ function Navbar() {
     };
   }, [isOpenSubMenu]);
 
+  // Filter Actions filter handler, open calendar and take a range
+  const handleCheckInClick = () => {
+    setShowCalendar((prev) => !prev);
+    // setShowCalendar(!showCalendar);
+  };
+  const handleSelect = (ranges) => {
+    setStartDate(ranges.selection.startDate);
+    setEndDate(ranges.selection.endDate);
+  };
+  // Handle search submit
+  const handleSearchSubmit = () => {
+    const queryParams = new URLSearchParams();
+
+    if (selectedCategoryFilter) {
+      queryParams.append("filter", selectedCategoryFilter);
+    }
+    if (startDate) {
+      queryParams.append("start_date", format(startDate, "yyyy-MM-dd"));
+    }
+    if (endDate) {
+      queryParams.append("end_date", format(endDate, "yyyy-MM-dd"));
+    }
+    if (guests) {
+      queryParams.append("guests", guests);
+    }
+    if (userLocation) {
+      queryParams.append("lat", userLocation.lat);
+      queryParams.append("lng", userLocation.lng);
+    }
+
+    places_filter(queryParams.toString())
+      .then((response) => {
+        navigate("/place-filters", { state: { results: response.data } });
+      })
+      .catch((error) => {
+        console.error("Error fetching filtered places:", error);
+      });
+  };
+  // logout function
   const handleLogout = async () => {
     setIsOpenSubMenu(false);
     try {
@@ -263,15 +310,19 @@ function Navbar() {
         setStartDate={setStartDate}
         setEndDate={setEndDate}
         setShowCalendar={setShowCalendar}
+        setGuests={setGuests}
+        setSelectedCategoryFilter={setSelectedCategoryFilter}
         isHoveredSubmitSearch={isHoveredSubmitSearch}
         setIsHoveredSubmitSearch={setIsHoveredSubmitSearch}
         handleSelect={handleSelect}
+        onSearchSubmit={handleSearchSubmit}
       />
 
       {/* ====== Filter ====== */}
-      <FilterSlider onSelect={(filter) => setSelectedFilter(filter)} />
+      {isUrlEmpty && (
+        <FilterSlider onSelect={(filter) => setSelectedFilter(filter)} />
+      )}
     </div>
   );
 }
-
 export default Navbar;
